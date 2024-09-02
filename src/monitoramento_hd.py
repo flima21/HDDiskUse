@@ -85,11 +85,26 @@ if percentage_free >= PERCENTAGE_HD:
         # Autentica no servidor SMTP
         servidor.login(USER_EMAIL, PSWD_EMAIL)
         
-        # mensagem 
-        mensagem = f"<p>The HD <b>(ip address: {IP_ADDRESS})</b> use is define to alert with capacity free the HD <b>{PERCENTAGE_HD}%</b>, but the use currently with <b>{percentage_free}%</b>. <br><br>Pay attention<p>"
+        # Corpo da mensagem em HTML
+        mensagem = f"""
+        <html>
+          <head></head>
+          <body>
+            <h1 style="color: #5e9ca0;">Alerta de Capacidade do HD</h1>
+            <p>Olá,</p>
+            <p>Este é um alerta sobre a capacidade do HD do servidor {IP_ADDRESS}</p>
+            <p>HD em uso: {used_hd}</p>
+            <p>HD em disponível: {free_hd}</p>
+            <p>HD total: {total_hd}</p>
+            <p>Porcentagem do uso: {percentage_free}</p>
+            <p>Alerta definido em: {PERCENTAGE_HD}</p>
+            <p><strong>Por favor, tome as ações necessárias.</strong></p>
+            <p>Atenciosamente,<br>Equipe de Monitoramento</p>
+          </body>
+        </html>
+        """
 
-        # Anexa o corpo da mensagem ao e-mail
-        msg.attach(MIMEText(mensagem, 'plain'))
+        msg.attach(MIMEText(mensagem, 'html'))
 
         # Envia o email
         servidor.sendmail(USER_EMAIL, all_emails, msg=msg.as_string())
