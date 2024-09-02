@@ -19,9 +19,11 @@ import smtplib
 import dotenv
 import os
 import socket
+import sys 
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from datetime import datetime
 
 # read the .env
 dotenv.load_dotenv()
@@ -35,6 +37,7 @@ PORT_EMAIL = os.getenv('PORT_EMAIL')
 USER_EMAIL = os.getenv('USER_EMAIL')
 PSWD_EMAIL = os.getenv('PSWD_EMAIL')
 IP_ADDRESS = os.getenv('IP_ADDRESS')
+TODAY = datetime.today().strftime('%Y%m%d')
 
 print(f"IP ADDRESS {IP_ADDRESS}")
 
@@ -77,6 +80,8 @@ all_emails = to_email + cc
 
 if percentage_free >= PERCENTAGE_HD:
     try:
+        if os.path.exists('log/' + TODAY):
+            sys.exit()
         # Conecta ao servidor SMTP do Gmail usando SSL
         servidor = smtplib.SMTP_SSL(HOST_EMAIL, PORT_EMAIL)  # Usa SSL na porta 465
         
@@ -106,6 +111,11 @@ if percentage_free >= PERCENTAGE_HD:
 
         # Envia o email
         servidor.sendmail(USER_EMAIL, all_emails, msg=msg.as_string())
+        
+        with open('log/'+TODAY,'w') as file:
+            file.write(TODAY)
+            file.close()
+
     except Exception as e:
         print(f"Erro ao enviar o email: {e}")
     finally:
