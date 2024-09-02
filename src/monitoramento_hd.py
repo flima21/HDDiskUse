@@ -93,11 +93,11 @@ if percentage_free >= PERCENTAGE_HD:
             <h1 style="color: #5e9ca0;">Alerta de Capacidade do HD</h1>
             <p>Olá,</p>
             <p>Este é um alerta sobre a capacidade do HD do servidor {IP_ADDRESS}</p>
-            <p>HD em uso: {used_hd}</p>
-            <p>HD em disponível: {free_hd}</p>
-            <p>HD total: {total_hd}</p>
-            <p>Porcentagem do uso: {percentage_free}</p>
-            <p>Alerta definido em: {PERCENTAGE_HD}</p>
+            <p>HD em uso: {used_hd}GB</p>
+            <p>HD em disponível: {free_hd}GB</p>
+            <p>HD total: {total_hd}GB</p>
+            <p>Porcentagem do uso: {percentage_free}%</p>
+            <p>Alerta definido em: {PERCENTAGE_HD}%</p>
             <p><strong>Por favor, tome as ações necessárias.</strong></p>
             <p>Atenciosamente,<br>Equipe de Monitoramento</p>
           </body>
