@@ -34,9 +34,7 @@ HOST_EMAIL = os.getenv('HOST_EMAIL')
 PORT_EMAIL = os.getenv('PORT_EMAIL')
 USER_EMAIL = os.getenv('USER_EMAIL')
 PSWD_EMAIL = os.getenv('PSWD_EMAIL')
-
-HOSTNAME = socket.gethostname()
-IP_ADDRESS = socket.gethostbyname(HOSTNAME)
+IP_ADDRESS = os.getenv('IP_ADDRESS')
 
 print(f"IP ADDRESS {IP_ADDRESS}")
 
