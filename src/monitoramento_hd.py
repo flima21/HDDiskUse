@@ -86,7 +86,7 @@ if percentage_free >= PERCENTAGE_HD:
         servidor.login(USER_EMAIL, PSWD_EMAIL)
         
         # mensagem 
-        mensagem = f"The HD (ip address: {IP_ADDRESS}) use is define to alert with capacity free the HD {PERCENTAGE_HD}%, but the use currently with {percentage_free}%. Pay attention"
+        mensagem = f"<p>The HD <b>(ip address: {IP_ADDRESS})</b> use is define to alert with capacity free the HD <b>{PERCENTAGE_HD}%</b>, but the use currently with <b>{percentage_free}%</b>. <br><br>Pay attention<p>"
 
         # Anexa o corpo da mensagem ao e-mail
         msg.attach(MIMEText(mensagem, 'plain'))
