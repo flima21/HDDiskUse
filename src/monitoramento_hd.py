@@ -66,10 +66,10 @@ if percentage_free >= PERCENTAGE_HD:
         servidor.login(USER_EMAIL, PSWD_EMAIL)
         
         # mensagem 
-        mensagem = f"The HD use is define to alert with capacity free the {PERCENTAGE_HD}, but the use currently with {percentage_free}. Pay attention"
+        mensagem = f"The HD (ip address: {IP_ADDRESS}) use is define to alert with capacity free the HD {PERCENTAGE_HD}%, but the use currently with {percentage_free}%. Pay attention"
 
         # Envia o email
-        servidor.sendmail(USER_EMAIL, 'flima@jpti.com.br', msg=mensagem)
+        servidor.sendmail(USER_EMAIL, 'jmira@jpti.com.br', msg=mensagem)
     except Exception as e:
         print(f"Erro ao enviar o email: {e}")
     finally:
