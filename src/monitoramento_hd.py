@@ -20,6 +20,9 @@ import dotenv
 import os
 import socket
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 # read the .env
 dotenv.load_dotenv()
 
@@ -57,6 +60,23 @@ print(f'TOTAL HD: {total_hd}')
 
 print("*" * 20)
 
+# Configurações do e-mail
+to_email = ['flima@jpti.com.br']  # Lista de destinatários principais
+cc = ['jmira@jpti.com.br']  # Lista de usuários em cópia
+subject = 'HD USE'
+mensagem = 'Esta é a mensagem do email.'
+
+# Criação do objeto MIMEMultipart
+msg = MIMEMultipart()
+msg['From'] = USER_EMAIL
+msg['To'] = ', '.join(to_email)  # Concatena a lista de destinatários principais
+msg['Cc'] = ', '.join(cc)  # Concatena a lista de usuários em cópia
+msg['Subject'] = subject
+
+
+# Lista de todos os destinatários (para enviar corretamente o e-mail)
+all_emails = to_email + cc
+
 if percentage_free >= PERCENTAGE_HD:
     try:
         # Conecta ao servidor SMTP do Gmail usando SSL
@@ -68,8 +88,11 @@ if percentage_free >= PERCENTAGE_HD:
         # mensagem 
         mensagem = f"The HD (ip address: {IP_ADDRESS}) use is define to alert with capacity free the HD {PERCENTAGE_HD}%, but the use currently with {percentage_free}%. Pay attention"
 
+        # Anexa o corpo da mensagem ao e-mail
+        msg.attach(MIMEText(mensagem, 'plain'))
+
         # Envia o email
-        servidor.sendmail(USER_EMAIL, 'jmira@jpti.com.br', msg=mensagem)
+        servidor.sendmail(USER_EMAIL, all_emails, msg=msg.as_string())
     except Exception as e:
         print(f"Erro ao enviar o email: {e}")
     finally:
